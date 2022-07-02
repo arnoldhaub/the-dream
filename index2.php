@@ -17,7 +17,7 @@ if(isset($_POST['submitButton'])){ // If form submitted
     for($i=0; $i < count($moneySign); $i++) { // Try to find the good currency and change the value of "$message"
         if($whatCurrency == $moneySign[$i]){
             
-            $message = "<p>$amount EUR → <b>".number_format((float)$amount*$rates[$i], 2,'.', '')." ".$moneySign[$i]. "</b>.</p>";
+            $message = "<p>$amount $moneySign[$i] → <b>".number_format((float)$amount/$rates[$i], 2,'.', '')." EUR</b>.</p>";
         }
     }
     
@@ -47,13 +47,6 @@ if(isset($_POST['submitButton'])){ // If form submitted
             <form action="" method="post" class="w-100" >
                 <p>
                     <label for="countries" class="form-label lead">f r o m </label><br>
-                    <select id="euro" name="euro" class="form-control text-center">
-                        <option value="EUR">Europe (EUR)</option>
-                    </select>
-                </p> 
-                <p><button type="button" onclick="location.href='index2.php'" class="btn btn-light text-secondary">s w i t c h</button></p>  
-                <p>
-                    <label for="countries" class="form-label lead">t o </label><br>
                     <select id="countries" name="countries" class="form-control text-center">
 
                     <?php 
@@ -69,10 +62,16 @@ if(isset($_POST['submitButton'])){ // If form submitted
                             }
                         }
                     ?>
-                
-
+                </p> 
+                <p><button type="button" onclick="location.href='index.php'" class="btn btn-light text-secondary">s w i t c h</button></p>  
+                <p>
+                    <label for="countries" class="form-label lead">t o </label><br>
+                    <select id="euro" name="euro" class="form-control text-center">
+                        <option value="EUR">Europe (EUR)</option>
+                    </select>
+                    
                 <p><label for="toConvert" class="form-label lead">a m o u n t</label> <br>
-                <input type="number" id="toConvert" name="toConvert" placeholder='Euro you want to exchange' class="form-control text-center" required="required"></p>
+                <input type="number" id="toConvert" name="toConvert" placeholder='Amount you want to exchange' class="form-control text-center" required="required"></p>
                 <input type="submit" name="submitButton" class="btn btn-secondary text-white btn-lg text-uppercase w-100" value="s u b m i t">
             </form>
             <?php echo "<div id='message'>$message</div>"; ?>
